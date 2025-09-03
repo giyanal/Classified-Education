@@ -3,54 +3,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Education Center</title>
-    <link rel="stylesheet" href="styles.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+            <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-52JK8E2M5N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-52JK8E2M5N');
+</script>
 </head>
 <body>
     <!-- Navigation Bar -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <img src=https://tipsamanolx.com/wp-content/uploads/2024/08/LOGO-PUTIH.png alt="Logo">
-            </div>
-            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
-            <label for="menu-toggle" class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <label for="menu-toggle" class="menu-overlay"></label>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Education Center</a></li>
-                    <li><a href="#">Tool Marketplace</a></li>
-                    <li><a href="#">Seller Account</a></li>
-                </ul>
-            </nav>
-            <div class="user-area">
-                <a href="#" class="language">ID</a>
-                <a href="#" class="profile">
-                    <img src="https://placeholder.pics/svg/30x30/DEDEDE/555555/User" alt="Profile">
-                </a>
-            </div>
-        </div>
-    </header>
+<nav class="navbar">
+  <div class="logo">
+    <a class="nav-link active" href="https://tipsamanolx.com/home/"> Tipsaman</a>
+  </div>
 
-    <!-- Hero Banner -->
-    <section class="hero-banner">
-        <div class="banner-content">
-            <div class="banner-text">
-                <h1>TREND BELANJA TERBARU YANG BUAT TOKOMU BANJIR ORDERAN</h1>
-                <p>PERTAMA TAHUN MINGGU</p>
-                <button class="btn-primary">TENTANG EDU</button>
-            </div>
-            <div class="banner-image">
-                <img src="https://placeholder.pics/svg/300x300/DEDEDE/555555/Expert" alt="Expert">
-            </div>
-        </div>
-    </section>
+  <div class="nav-links" id="navMenu">
+    <a href="#"><b>Pusat Edukasi</b></a>
+    <a class="nav-link active" href="https://www.olx.co.id/mybenefits" target="_blank" rel="noopener noreferrer"></a>
+    <a class="nav-link active" href="https://help.olx.co.id/hc/id" target="_blank" rel="noopener noreferrer"><b>Bantuan</b></a>
+  </div>
 
-     <!-- Features Section -->
+<div class="search-container" id="searchContainer">
+  <input type="text" class="search-box" placeholder="Cari..." />
+  
+  <img src="https://tipsamanolx.com/wp-content/uploads/2025/07/search-gelap.png" 
+       alt="Ikon Cari" 
+       class="search-icon" 
+       id="searchIcon" />
+       
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+
+<script>
+  // SEARCH TOGGLE
+  const searchContainer = document.getElementById('searchContainer');
+  const searchIcon = document.getElementById('searchIcon');
+  const searchBox = document.querySelector('.search-box');
+  const searchResults = document.getElementById('searchResults');
+
+  // HAMBURGER TOGGLE
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+
+  const dummyData = [
+    { title: "Panduan Daftar Akun di OLX", img: "https://tipsamanolx.com/wp-content/uploads/2025/08/Panduan-Daftar-OLX.jpg", link: "https://tipsamanolx.com/panduan-daftar-akun-olx/" },
+    { title: "Panduan Cara Pasang Iklan di OLX", img: "https://tipsamanolx.com/wp-content/uploads/2025/08/Panduan-Cara-Pasang-Iklan.jpg", link: "https://tipsamanolx.com/cara-pasang-iklan-di-olx/" },
+    { title: "Kunci Jualan Lancar? Mulai dari Cara balas pesan yang benar", img: "https://tipsamanolx.com/wp-content/uploads/2025/08/Tips-Balas-Pesan.jpg", link: "https://tipsamanolx.com/kunci-jualan-lancar-mulai-dari-balas-chat-yang-benar/" },
+    { title: "Tips Pasang Produk Jualan", img: "https://tipsamanolx.com/wp-content/uploads/2025/08/Foto-Keren.jpg", link: "https://tipsamanolx.com/panduan-foto-iklan-di-olx/" }
+  ];
+
+  // --- FUNGSI KLIK IKON SEARCH YANG SUDAH DIPERBARUI ---
+  searchIcon.addEventListener('click', () => {
+    searchContainer.classList.toggle('active');
+
+    if (searchContainer.classList.contains('active')) {
+      // Jika search bar dibuka, fokus ke input
+      searchBox.focus();
+    } else {
+      // Jika search bar ditutup, bersihkan semuanya
+      searchBox.value = ''; // Kosongkan input
+      searchResults.innerHTML = ''; // Hapus hasil pencarian
+      searchResults.classList.remove('active'); // Sembunyikan kontainer hasil
+    }
+  });
+  // --- AKHIR PERUBAHAN ---
+
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+
+  searchBox.addEventListener('input', () => {
+    const query = searchBox.value.toLowerCase();
+    searchResults.innerHTML = '';
+
+    if (query.trim() !== '') {
+      const filtered = dummyData.filter(item => item.title.toLowerCase().includes(query));
+
+      filtered.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.link;
+        a.innerHTML = `<img src="${item.img}" alt="${item.title}"> ${item.title}`;
+        searchResults.appendChild(a);
+      });
+
+      searchResults.classList.add('active');
+    } else {
+      searchResults.classList.remove('active');
+    }
+  });
+</script>
+   
+     <!-- Features Section 
      <section class="features">
         <div class="features-container">
             <div class="feature-card">
@@ -69,199 +125,208 @@
                 <p>Ikuti strategi jitu dari seller sukses & kembangkan bisnis anda</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Recommended Topics -->
     <section class="topics">
         <div class="section-header">
-            <h2>Topik yang Direkomendasikan</h2>
-            <a href="#" class="view-all">Lihat semua</a>
+            <h2>Mulai Berjualan,Yuk!</h2>
+            <a href="https://tipsamanolx.com/artikel-seller-edu/" class="view-all">Lihat semua</a>
         </div>
         <div class="topics-container">
             <div class="topic-card">
-                <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Marketing" alt="Marketing">
-                <h3>Strategi Marketing Sukses</h3>
-                <p>Pembelajaran Dasar</p>
-                <div class="topic-meta">
-                    <span><i class="far fa-clock"></i> 30 menit</span>
-                    <span><i class="far fa-file"></i> 5 modul</span>
-                </div>
+                <a class="nav-link active" href="https://tipsamanolx.com/panduan-daftar-akun-olx" target="_blank" rel="noopener noreferrer">
+                <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Panduan-Daftar-OLX.jpg" alt="Marketing">
+                <h3>Panduan Daftar Akun di OLX</h3>
+                <p>Baca Selengkapnya ></p>
+            </a>
             </div>
             <div class="topic-card">
-                <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Analytics" alt="Analytics">
-                <h3>Cara Melihat Analisa Toko Penjual</h3>
-                <p>Pembelajaran Dasar</p>
-                <div class="topic-meta">
-                    <span><i class="far fa-clock"></i> 20 menit</span>
-                    <span><i class="far fa-file"></i> 3 modul</span>
-                </div>
+                <a class="nav-link active" href="https://tipsamanolx.com/cara-pasang-iklan-di-olx" target="_blank" rel="noopener noreferrer">
+                <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Panduan-Cara-Pasang-Iklan.jpg" alt="Analytics">
+                <h3>Panduan Cara pasang iklan di OLX</h3>
+                <p>Baca Selengkapnya ></p>
+            </a>
             </div>
             <div class="topic-card">
-                <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Finance" alt="Finance">
-                <h3>Program Bundling Produk</h3>
-                <p>Pembelajaran Dasar</p>
-                <div class="topic-meta">
-                    <span><i class="far fa-clock"></i> 25 menit</span>
-                    <span><i class="far fa-file"></i> 4 modul</span>
-                </div>
+                <a class="nav-link active" href="https://tipsamanolx.com/kunci-jualan-lancar-mulai-dari-balas-chat-yang-benar" target="_blank" rel="noopener noreferrer">
+                <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Tips-Balas-Pesan.jpg" alt="Finance">
+                <h3>Kunci Jualan lancar? Mulai dari cara balas pesan yang benar</h3>
+                <p>Baca Selengkapnya ></p>
+            </a>
             </div>
             <div class="topic-card">
-                <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Growth" alt="Growth">
-                <h3>Strategi Live Streaming</h3>
-                <p>Pembelajaran Dasar</p>
-                <div class="topic-meta">
-                    <span><i class="far fa-clock"></i> 35 menit</span>
-                    <span><i class="far fa-file"></i> 6 modul</span>
-                </div>
+                <a class="nav-link active" href="https://tipsamanolx.com/panduan-foto-iklan-di-olx" target="_blank" rel="noopener noreferrer">
+                <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Foto-Keren.jpg" alt="Growth">
+                <h3>Tips pasang produk jualan</h3>
+                <p>Baca Selengkapnya ></p>
+            </a>
             </div>
         </div>
     </section>
+    
+    
+<section class="promo-banner">
+    <div class="promo-banner-container">
+        <a href="https://chat.whatsapp.com/G0Q3gJCHXUGDsERnEbF5G1" target="_blank" rel="noopener noreferrer">
+            <picture>
+                <source media="(max-width: 768px)" srcset="https://tipsamanolx.com/wp-content/uploads/2025/08/Comunity-02-scaled.jpg">
+                
+                <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Comunity-01-scaled.jpg" alt="Promotional Banner">
+            </picture>
+        </a>
+    </div>
+</section>
 
     <!-- Video Education -->
     <section class="videos">
         <div class="section-header">
-            <h2>Video Edukasi</h2>
-            <a href="#" class="view-all">Lihat semua</a>
+            <h2>Video Edukasi Untukmu</h2>
+            <a href="https://tipsamanolx.com/video-seller-edu/" class="view-all">Lihat semua</a>
         </div>
-        <p class="subtitle">Belajar untuk Jadi Unggul</p>
+        <p class="subtitle"></p>
         <div class="videos-container">
+  <div class="video-card">
+    <div class="video-thumbnail">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/Qs-UakV-_-w?si=lRODjl6KFGHMuqYN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-info">
+      <h3>Jangkau Lebih Banyak Pembeli dengan Fitur Multi Lokasi!</h3>
+      <p>Pelajari cara mengoptimalkan fitur multi lokasi</p>
+    </div>
+  </div>
+          <div class="video-card">
+    <div class="video-thumbnail">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/FUBy0wPQJmQ?si=_WRJxmK3FYG9CBYj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-info">
+      <h3>TARIK PERHATIAN PEMBELI DENGAN FITUR SPOTLIGHT!</h3>
+      <p>Pelajari cara menggunakan fitur spotlight</p>
+    </div>
+  </div>
             <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Video1" alt="Video 1">
-                    <span class="video-duration">10:25</span>
-                </div>
-                <div class="video-info">
-                    <h3>Bersaing Dengan Seller Lainnya</h3>
-                    <p>Pelajari cara mengoptimalkan toko untuk menarik pembeli</p>
-                    <button class="btn-secondary">Tonton</button>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Video2" alt="Video 2">
-                    <span class="video-duration">08:15</span>
-                </div>
-                <div class="video-info">
-                    <h3>Praktik dan Tips Marketing</h3>
-                    <p>Pelajari strategi marketing dari pakar bisnis online</p>
-                    <button class="btn-secondary">Tonton</button>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Video3" alt="Video 3">
-                    <span class="video-duration">12:30</span>
-                </div>
-                <div class="video-info">
-                    <h3>Tingkatkan Penjualan dengan WhatsApp</h3>
-                    <p>Manfaatkan WhatsApp sebagai medium promosi yang efektif</p>
-                    <button class="btn-secondary">Tonton</button>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/Video4" alt="Video 4">
-                    <span class="video-duration">09:45</span>
-                </div>
-                <div class="video-info">
-                    <h3>Panduan Lengkap Pengiriman</h3>
-                    <p>Pelajari cara optimalisasi pengiriman untuk kepuasan pelanggan</p>
-                    <button class="btn-secondary">Tonton</button>
-                </div>
-            </div>
-        </div>
+    <div class="video-thumbnail">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/NOKQ6yJb3uE?si=EAVtGq8igwtaF1lf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-info">
+      <h3>JUAL MOBIL BEKAS LEBIH PROFESIONAL DENGAN FITUR SUPER DEALER</h3>
+      <p>Pelajari cara menggunakan fitur super dealer</p>
+    </div>
+  </div>
+  <div class="video-card">
+    <div class="video-thumbnail">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/FD_UeqRYcM8?si=zMh_oFmliJzMcv8i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-info">
+      <h3>Ini Cara Bikin Iklan Jadi Beda dan Cepat Dilirik! Pakai Fitur Diskon!</h3>
+      <p>Pelajari cara menggunakan fitur diskon</p>
+    </div>
+  </div>
+        <!-- Tambah video-card lainnya -->
+    </div>
+    
+    
     </section>
-
-    <!-- Seller Success Stories -->
+    <!--Trend-->
     <section class="success-stories">
         <div class="section-header">
-            <h2>Inspirasi Sukses</h2>
-            <a href="#" class="view-all">Lihat semua</a>
+            <h2>💡 Yuk Intip Trend Terbaru di OLX</h2>
+           <!-- <a href="#" class="view-all">Lihat semua</a> -->
         </div>
         <div class="stories-container">
             <div class="story-card">
                 <div class="story-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/SellerStory1" alt="Seller Story 1">
-                    <span class="video-tag">VIDEO</span>
+                    <a class="nav-link active" href="https://tipsamanolx.com/panduan-foto-iklan-di-olx" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Foto-Keren.jpg" alt="Seller Story 1">
+                    </a>
                 </div>
                 <div class="story-info">
-                    <h3>Sukses Membangun Brand dari Nol</h3>
-                    <p>Inspirasi dari kisah sukses Bapak Dian Satria seorang pengusaha UKM</p>
-                    <button class="btn-secondary">Lihat</button>
+                    <h3>Tips pasang produk jualan</h3>
+                    <p>Baca Selengkapnya ></p>
                 </div>
             </div>
             <div class="story-card">
                 <div class="story-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/SellerStory2" alt="Seller Story 2">
-                    <span class="video-tag">VIDEO</span>
+                    <a class="nav-link active" href="https://tipsamanolx.com/kunci-jualan-lancar-mulai-dari-balas-chat-yang-benar" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Tips-Balas-Pesan.jpg" alt="Seller Story 1">
+                    </a>
                 </div>
                 <div class="story-info">
-                    <h3>Tips Menghadapi Persaingan Pasar</h3>
-                    <p>Strategi dari pengusaha berpengalaman dalam menghadapi kompetisi</p>
-                    <button class="btn-secondary">Lihat</button>
+                    <h3>Kunci Jualan lancar? Mulai dari cara balas pesan yang benar</h3>
+                    <p>Baca Selengkapnya ></p>
                 </div>
             </div>
             <div class="story-card">
                 <div class="story-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/SellerStory3" alt="Seller Story 3">
-                    <span class="video-tag">VIDEO</span>
+                    <a class="nav-link active" href="https://tipsamanolx.com/cara-pasang-iklan-di-olx" target="_blank" rel="noopener noreferrer">
+                    <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Panduan-Cara-Pasang-Iklan.jpg" alt="Seller Story 1">
+                    </a>
                 </div>
                 <div class="story-info">
-                    <h3>Dari Hobi Menjadi Bisnis Besar</h3>
-                    <p>Bagaimana passion dapat berubah menjadi sumber pendapatan utama</p>
-                    <button class="btn-secondary">Lihat</button>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="story-thumbnail">
-                    <img src="https://placeholder.pics/svg/250x150/E6F5FF/0078D7/SellerStory4" alt="Seller Story 4">
-                    <span class="video-tag">VIDEO</span>
-                </div>
-                <div class="story-info">
-                    <h3>Digitalisasi Bisnis Jamu Traditional</h3>
-                    <p>Kisah sukses transformasi bisnis traditional ke platform digital</p>
-                    <button class="btn-secondary">Lihat</button>
+                    <h3>Panduan Cara pasang iklan di OLX</h3>
+                    <p>Baca Selengkapnya ></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- OLX Lab Banner -->
+    <!-- OLX Lab Banner
     <section class="lab-banner">
         <div class="lab-container">
             <div class="lab-logo">
-                <img src=https://tipsamanolx.com/wp-content/uploads/2024/08/LOGO-PUTIH.png>
-                <h2 style="color: white;">OLX Lab</h2>
+               <!-- <img src=https://tipsamanolx.com/wp-content/uploads/2024/08/LOGO-PUTIH.png>
+                <h2 style="color: white;">PUSAT EDUKASI</h2>
             </div>
             <div class="lab-features">
                 <div class="lab-feature">
-                    <h3>Fitur Online</h3>
+                    <h3><a class="nav-link active"  href="#" target="_blank" rel="noopener noreferrer">Agent Interaktif</h3></a>
                     <p>Akses kapan saja dari mana saja</p>
                 </div>
                 <div class="lab-feature">
-                    <h3>Komunitas</h3>
-                    <p>Terhubung dengan sesama penjual</p>
+                    <h3><a class="nav-link active"  href="https://www.olx.co.id/membership/buy" target="_blank" rel="noopener noreferrer">Paket Penjualan</h3></a>
+                    <p>Dapatkan diskon harga yang kompetitif</p>
                 </div>
                 <div class="lab-feature">
-                    <h3>Sertifikat Gratis</h3>
-                    <p>Dapatkan sertifikat yang diakui</p>
+                    <h3><a class="nav-link active"  href="#" target="_blank" rel="noopener noreferrer">Komunitas</h3></a>
+                    <p>Terhubung dengan sesama penjual</p>
                 </div>
+    </section> -->
+
+    <section class="bottom-banner-section">
+        <div class="bottom-banner-wrapper">
+
+            <div class="banner-card">
+                <a href="https://wa.me/6289609122199?text=halo%20saya%20ingin%20bertanya%20seputar%20edukasi%20penjual%20olx"  target="_blank" rel="noopener noreferrer">
+                    <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/custome-service.png" >
+                    <div class="banner-overlay">
+                        <h4></h4>
+                    </div>
+                </a>
             </div>
-            <a href="#" class="btn-cta">CEK SELENGKAPNYA</a>
+
+            <div class="banner-card">
+                <a href="https://api.whatsapp.com/send/?phone=6285186056080&text=Halo+OLA%2C+ada+promo+dan+product+terbaru+apa+hari+ini+di+OLX%3F&type=phone_number&app_absent=0"  target="_blank" rel="noopener noreferrer">
+                    <img src="https://tipsamanolx.com/wp-content/uploads/2025/08/Help-Center.jpg">
+                    <div class="banner-overlay">
+                        <h4></h4>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </section>
+    
 
-    <!-- Articles Section -->
+    <!-- Articles Section
     <section class="articles">
         <div class="section-header">
             <h2>Artikel Bantuan</h2>
-            <a href="#" class="view-all">Lihat semua</a>
         </div>
         <div class="articles-container">
             <div class="article-card">
                 <i class="fas fa-shopping-bag article-icon"></i>
                 <h3>Panduan Memulai</h3>
-                <p>Petunjuk dasar untuk memulai berjualan di platform ini</p>
+                <p>Petunjuk dasar untuk memulai berjualan di platform OLX</p>
                 <a href="#" class="read-more">Baca Selengkapnya</a>
             </div>
             <div class="article-card">
@@ -272,45 +337,44 @@
             </div>
             <div class="article-card">
                 <i class="fas fa-coins article-icon"></i>
-                <h3>Panduan Keuangan</h3>
-                <p>Kelola keuangan dan pembayaran dengan lebih efisien</p>
+                <h3>Panduan Fitur Platform</h3>
+                <p>Petunjuk untuk mengetahui fitur apa saja yang ada di platform OLX</p>
                 <a href="#" class="read-more">Baca Selengkapnya</a>
             </div>
         </div>
-    </section>
+    </section>  -->
 
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Layanan</h4>
-                    <ul>
-                        <li><a href="#">Bantuan</a></li>
-                        <li><a href="#">Hubungi Kami</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Tentang Kami</h4>
-                    <ul>
-                        <li><a href="#">Karir</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Ikuti Kami</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>Layanan</h4>
+        <ul>
+          <li><a class="nav-link active" href="https://chat.whatsapp.com/G0Q3gJCHXUGDsERnEbF5G1" target="_blank" rel="noopener noreferrer">Komunitas</a></li>
+          <li><a class="nav-link active" href="https://help.olx.co.id/hc/id" target="_blank" rel="noopener noreferrer">Pusat Bantuan</a></li>
+          <li><a class="nav-link active" href="https://www.olx.co.id/payments/businesspackages/my_account" target="_blank" rel="noopener noreferrer">Paket Penjualan</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Tentang Kami</h4>
+        <ul>
+          <li><a class="nav-link active" href="https://tipsamanolx.com/home/" target="_blank" rel="noopener noreferrer">Tipsaman</a></li>
+          <li><a class="nav-link active" href="https://www.olx.co.id/news/" target="_blank" rel="noopener noreferrer">OLX News</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Ikuti Kami</h4>
+        <div class="social-links">
+          <a class="nav-link active" href="https://www.facebook.com/olxid/?locale=id_ID" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+          <a class="nav-link active" href="https://x.com/olxid_official" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+          <a class="nav-link active" href="https://www.instagram.com/olx_id/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a class="nav-link active" href="https://www.youtube.com/channel/UCpK91QSVxobdc30JaTMvjJA" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
             <div class="copyright">
-                <p>&copy; 2025 Seller Education Center. All rights reserved.</p>
+                <p>&copy; 2025 Pusat Edukasi OLX. All rights reserved.</p>
             </div>
         </div>
     </footer>

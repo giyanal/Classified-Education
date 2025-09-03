@@ -1,25 +1,26 @@
 /* Global Styles */
 :root {
-    --primary-color: #3876fe;
+    --primary-color: #0f2e33;
     --secondary-color: #ffffff;
-    --accent-color: #3876fe;
+    --accent-color: #6495ed;
     --light-color: #ffffff;
     --dark-color: #222222;
-    --gray-color: #f5f5f5;
+    --gray-color: #f2f2f2;
     --text-color: #333333;
     --border-color: #e8e8e8;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+     margin: 0;
+    font-family: 'Poppins', sans-serif, 'Inter';
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 2;
     background-color: var(--gray-color);
 }
 
@@ -53,7 +54,7 @@ button {
 }
 
 .btn-primary:hover {
-    background-color: #d73d1c;
+    background-color: #6495ed;
 }
 
 .btn-secondary {
@@ -67,7 +68,7 @@ button {
 }
 
 .btn-secondary:hover {
-    background-color: #fff0eb;
+    background-color: #6495ed;
 }
 
 .btn-cta {
@@ -83,7 +84,7 @@ button {
 }
 
 .btn-cta:hover {
-    background-color: #d73d1c;
+    background-color: #6495ed;
 }
 
 .view-all {
@@ -101,91 +102,194 @@ button {
 
 .section-header h2 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 00;
 }
 
 /* Header Styles */
-header {
-    background-color: var(--primary-color);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.navbar {
+  background-color: #cbf7ee;
+  color: --dark-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: relative; /* 👈 TAMBAHKAN INI */
+}
+    .logo {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+.nav-links {
+  position: absolute;      /* 'Angkat' elemen ini dari alur normal */
+  left: 50%;             /* Posisikan 50% dari kiri navbar */
+  top: 50%;              /* Posisikan 50% dari atas navbar */
+  transform: translate(-50%, -50%); /* Geser kembali sebesar setengah dari ukurannya sendiri */
+
+  /* Properti asli Anda untuk mengatur jarak antar link */
+  display: flex;
+  gap: 2rem;
+}
+    .nav-links a {
+        
+      color: --dark-color;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Hamburger Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+    .hamburger div {
+      width: 22px;
+      height: 3px;
+      background-color: black;
+      transition: 0.3s;
+    }
+
+    /* Search Styles */
+   .search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: 0.3s;
+}
+.search-box {
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 2px;
+  outline: none;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.search-container.active .search-box {
+  width: 150px;
+  opacity: 1;
+  background-color: #fff;
+  color: #333;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
+.search-icon {
+  width: 30px;   /* Sesuaikan ukurannya */
+  height: 30px;  /* Sesuaikan ukurannya */
+  cursor: pointer; /* Mengubah kursor menjadi tangan saat di atas ikon */
+  margin-left: 8px;
+}
+.search-container.active .search-icon {
+  color: #2979ff;
+}
+    
+    .search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 999;
+}
+.search-results.active {
+  display: block;
+}
+.search-results a {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.search-results a:hover {
+  background-color: #f1f1f1;
+}
+.search-results a:last-child {
+        border-bottom: none;
+    }
+.search-results img {
+  width: 100px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-.logo {
-    flex: 0 0 120px;
-}
-
-/* CSS-only mobile menu toggle */
-.menu-checkbox {
+/* --- 1. ATURAN UNTUK TAMPILAN DESKTOP (Layar > 768px) --- */
+@media (min-width: 769px) {
+  /* Sembunyikan hamburger di desktop */
+  .hamburger {
     display: none;
-}
+  }
 
-.mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.mobile-menu-toggle span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background-color: var(--light-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-nav ul {
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: var(--light-color);
-    font-weight: 500;
-    padding: 8px 0;
-    position: relative;
-}
-
-nav ul li a.active {
-    color: var(--light-color);
-}
-
-nav ul li a.active::after {
-    content: '';
+  /* Tengahkan menu nav-links di desktop */
+  .nav-links {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--light-color);
-}
-
-.user-area {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Properti lain untuk desktop */
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-direction: row; /* Pastikan sejajar horizontal */
+    gap: 2rem;
+    padding: 0;
+    max-height: none; /* Hapus batasan tinggi */
+    background-color: transparent; /* Hapus background biru */
+  }
+
+  .nav-links.active {
+    /* Hapus state 'active' di desktop */
+    max-height: none;
+    padding: 0;
+  }
 }
 
-.language {
-    color: var(--text-color);
-    font-weight: 500;
+/* --- 2. ATURAN UNTUK TAMPILAN MOBILE (Layar <= 768px) --- */
+@media (max-width: 768px) {
+  /* Tampilkan hamburger di mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Sembunyikan menu dengan cara yang lebih modern */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #cbf7ee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0; /* Beri padding dari awal agar tidak ikut beranimasi */
+
+    /* 👇 Properti Kunci untuk Animasi Halus */
+    opacity: 0;
+    transform: translateY(-15px); /* Mulai dari posisi sedikit ke atas */
+    visibility: hidden; /* Sembunyikan sepenuhnya agar tidak bisa diklik saat transparan */
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s 0.3s;
+  }
+
+  /* Tampilkan menu saat aktif */
+  .nav-links.active {
+    opacity: 1;
+    transform: translateY(0); /* Kembali ke posisi normal (turun ke tempatnya) */
+    visibility: visible;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s 0s;
+  }
 }
 
 /* Hero Banner */
@@ -269,7 +373,7 @@ nav ul li a.active::after {
 /* Topics Section */
 .topics {
     padding: 40px 20px;
-    background-color: var(--gray-color);
+    background-color:  var(--light-color);
 }
 
 .topics-container {
@@ -294,8 +398,9 @@ nav ul li a.active::after {
 
 .topic-card img {
     width: 100%;
-    height: 150px;
-    object-fit: cover;
+    height: auto; /* Ganti dari 150px menjadi auto */
+    aspect-ratio: 16 / 9; /* Tentukan rasio yang diinginkan, misal 16/9, 4/3, atau 1/1 untuk kotak */
+    object-fit: cover; /* Biarkan properti ini, karena sekarang akan bekerja dengan benar */
 }
 
 .topic-card h3 {
@@ -314,14 +419,14 @@ nav ul li a.active::after {
     justify-content: space-between;
     padding: 10px 15px 15px;
     font-size: 0.8rem;
-    color: #777;
+    color: #f9f9f9;
     border-top: 1px solid var(--border-color);
 }
 
 /* Videos Section */
 .videos {
-    padding: 40px 20px;
-    background-color: var(--light-color);
+    padding: 40px 10px;
+    background-color:  var(--light-color);
 }
 
 .subtitle {
@@ -333,61 +438,74 @@ nav ul li a.active::after {
 
 .videos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    
+    /* 1. Default (Mobile): 1 kolom */
+    grid-template-columns: 1fr; 
 }
 
 .video-card {
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     overflow: hidden;
-    box-shadow: var(--shadow);
 }
 
 .video-thumbnail {
     position: relative;
-}
-
-.video-thumbnail img {
     width: 100%;
-    height: 160px;
-    object-fit: cover;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-.video-duration {
+.video-thumbnail iframe {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: var(--light-color);
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .video-info {
-    padding: 15px;
+    padding: 10px;
+    text-align: center;
 }
 
 .video-info h3 {
+    padding: 10px;
     font-size: 1rem;
     margin-bottom: 8px;
 }
 
 .video-info p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #666;
     margin-bottom: 15px;
-    height: 40px;
-    overflow: hidden;
+    height: 50px;
+    line-height: 1.5;
 }
 
-/* Success Stories Section */
+
+/* 2. Tablet: 2 kolom */
+@media (min-width: 768px) {
+    .videos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 3. Desktop: 4 kolom */
+@media (min-width: 1024px) {
+    .videos-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Trend Section */
 .success-stories {
     padding: 40px 20px;
-    background-color: var(--gray-color);
+    background-color: var(--light-color);
 }
 
 .stories-container {
@@ -400,19 +518,21 @@ nav ul li a.active::after {
 
 .story-card {
     background-color: var(--light-color);
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: var(--shadow);
 }
 
 .story-thumbnail {
     position: relative;
+    aspect-ratio: 16 / 9; /* Contoh untuk rasio widescreen, bisa diubah ke 4 / 3 atau 1 / 1 */
+    overflow: hidden; /* Pastikan gambar tidak keluar dari sudut rounded */
 }
 
 .story-thumbnail img {
     width: 100%;
-    height: 160px;
-    object-fit: cover;
+    height: 100%; /* Buat gambar mengisi penuh pembungkusnya */
+    object-fit: cover; /* 'cover' bekerja dengan baik di sini karena pembungkusnya sudah proporsional */
 }
 
 .video-tag {
@@ -502,12 +622,112 @@ nav ul li a.active::after {
     font-size: 1rem;
 }
 
-/* Articles Section */
+/* Promo Banner Section (Tidak berubah) */
+.promo-banner {
+    padding: 40px 20px;
+    background-color:  var(--light-color); /* Contoh warna abu-abu */
+}
+.promo-banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.promo-banner-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.promo-banner-container a:hover img {
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* --- ATURAN BARU UNTUK MENGGANTIKAN BOOTSTRAP --- */
+
+/* Rule BARU untuk section dengan latar abu-abu */
+.bottom-banner-section {
+    background-color: var(--light-color); /* Warna abu-abu hanya untuk section ini */
+    padding: 2.5rem 0; /* Memberi jarak atas-bawah pada strip abu-abu */
+}
+
+/* Menggantikan .container dan .row dari Bootstrap */
+.bottom-banner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto; /* HANYA untuk mengatur posisi tengah (kiri-kanan) */
+    padding: 0 20px;
+    display: flex;
+    gap: 24px;
+}
+
+/* Menggantikan .card dari Bootstrap */
+.banner-card {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+    
+    /* TAMBAHAN: Atur Rasio Aspek agar tidak 'gendut' */
+    aspect-ratio: 2 / 1; /* Rasio lebar:tinggi. Angka bisa diubah (misal: 16/9) */
+}
+
+.banner-card:hover {
+    transform: translateY(-5px); /* Efek terangkat saat disentuh cursor */
+}
+.banner-card a {
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    color: white;
+}
+.banner-card img {
+    width: 100%;
+    height: 110%;
+    object-fit: cover; /* Memastikan gambar mengisi penuh tanpa distorsi */
+    display: block;
+    transition: transform 0.3s ease;
+}
+.banner-card:hover img {
+    transform: scale(1.05); /* Efek zoom pada gambar */
+}
+
+/* Menggantikan .card-img-overlay */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-end; /* Mendorong teks ke bawah */
+    transition: background 0.3s ease;
+}
+.banner-card:hover .banner-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+}
+.banner-overlay h4 {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+
+/* --- Media Query untuk Tampilan Responsif --- */
+@media (max-width: 768px) {
+    .bottom-banner-wrapper {
+        flex-direction: column; /* Membuat banner tersusun ke bawah di HP */
+    }
+    .banner-overlay h4 {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Articles Section
 .articles {
     padding: 40px 20px;
     background-color: var(--light-color);
 }
-
 .articles-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -556,70 +776,105 @@ nav ul li a.active::after {
     text-decoration: underline;
 }
 
-/* Footer */
+*/
+
+
+/* Reset box-sizing agar semua padding dihitung */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Footer styling */
 footer {
-    background-color: #3876fe;
-    color: #fffcfc;
-    padding: 40px 20px 20px;
+  border-top: 0px solid #444;
+  background-color: var(--gray-color);
+  color: #444;
+  padding: 20px 0 1px;
 }
 
+/* Container harus center + max-width */
 .footer-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
 }
 
+/* Flex container */
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 20px;
 }
 
 .footer-column {
-    flex: 1;
-    min-width: 200px;
-    margin-bottom: 20px;
+  min-width: 200px;
+  flex: 1;
 }
 
 .footer-column h4 {
-    color: var(--light-color);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    color: #444;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-column ul li {
-    margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .footer-column ul li a {
-    color: #fffcfc;
-    transition: color 0.3s;
+  color: #444;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .footer-column ul li a:hover {
-    color: var(--light-color);
+  color: #ddd;
 }
 
+/* Sosial media */
 .social-links {
     display: flex;
+    justify-content: center; /* Center icon dalam flex container */
     gap: 15px;
+    margin-top: 10px;
 }
 
 .social-links a {
-    color: #fffcfc;
-    font-size: 1.2rem;
-    transition: color 0.3s;
+  color: #444;
+  font-size: 1.5rem;
+  transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: var(--light-color);
+  color: #ddd;
 }
+
 
 .copyright {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #444;
-    font-size: 0.9rem;
+    border-top: 0px solid #444;
+    font-size: 0.6rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+.footer-links {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center; /* << UBAH MENJADI INI */
+  }
 }
 
 /* Mobile Responsive */
@@ -641,97 +896,6 @@ footer {
     
     .umkm-feature {
         margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: flex;
-    }
-    
-    .user-area {
-        margin-left: auto;
-    }
-    
-    nav {
-        position: fixed;
-        top: 0;
-        left: -250px;
-        width: 250px;
-        height: 100vh;
-        background-color: var(--primary-color);
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        transition: left 0.3s ease;
-        z-index: 1000;
-        padding: 80px 20px 20px;
-    }
-    
-    .menu-checkbox:checked ~ nav {
-        left: 0;
-    }
-    
-    .menu-overlay {
-        display: block;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    
-    .menu-checkbox:checked ~ .menu-overlay {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
-    
-    .menu-checkbox:checked ~ .mobile-menu-toggle span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-    
-    .menu-checkbox:checked ~ .mobile-menu-toggle span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .menu-checkbox:checked ~ .mobile-menu-toggle span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-    }
-    
-    nav ul {
-        flex-direction: column;
-        gap: 25px;
-    }
-    
-    .banner-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .banner-text {
-        flex: 0 0 100%;
-        margin-bottom: 30px;
-    }
-    
-    .topics-container,
-    .videos-container,
-    .stories-container,
-    .articles-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .topic-card,
-    .video-card,
-    .story-card,
-    .article-card {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .footer-links {
-        flex-direction: column;
-    }
-    
-    .footer-column {
-        margin-bottom: 30px;
     }
 }
 
